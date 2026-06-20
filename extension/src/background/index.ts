@@ -72,19 +72,19 @@ async function triggerBreak() {
     return;
   }
 
+
   await chrome.scripting.executeScript({
     target: { tabId: tab.id },
     func: (payload) => {
+      console.log("Dispatching UNFRY_BREAK event:", payload);
       window.dispatchEvent(new CustomEvent("UNFRY_BREAK", { detail: payload }));
     },
     args: [{ breakEventId, dominantCategory: dominant, challenge, sessionId: sid }],
+  }).catch((err) => {
+    console.error("Event dispatch failed:", err);
   });
 
-  // also inject the overlay bundle if not present
-  await chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    files: ["src/overlay/inject.tsx"],
-  }).catch(() => {});
+
 
   tracker.reset();
 }

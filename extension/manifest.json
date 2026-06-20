@@ -7,7 +7,8 @@
   "host_permissions": ["<all_urls>"],
   "background": { "service_worker": "src/background/index.ts", "type": "module" },
   "content_scripts": [
-    { "matches": ["<all_urls>"], "js": ["src/content/scrapeContext.ts"], "run_at": "document_idle" }
+    { "matches": ["<all_urls>"], "js": ["src/content/scrapeContext.ts"], "run_at": "document_idle" },
+    { "matches": ["<all_urls>"], "js": ["src/overlay/inject.tsx"], "run_at": "document_start" }
   ],
   "web_accessible_resources": [
     { "resources": ["src/overlay/inject.tsx", "assets/*"], "matches": ["<all_urls>"] }

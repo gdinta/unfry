@@ -22,6 +22,10 @@ export function OverlayApp({ detail, onClose }: Props) {
     setTimeout(onClose, 250);
   }
 
+  function openDashboard() {
+    window.open(`${WEB_APP_URL}/dashboard`, "_blank", "noopener,noreferrer");
+  }
+
   if (done) return null;
 
   return (
@@ -29,8 +33,9 @@ export function OverlayApp({ detail, onClose }: Props) {
       <QuizCard
         challenge={challenge}
         dominantCategory={detail.dominantCategory}
-        onComplete={(correct) => respond("completed", correct)}
+        onComplete={(correct: boolean) => respond("completed", correct)}
         onSkip={() => respond("skipped")}
+        onOpenDashboard={openDashboard}
       />
     </GlassPanel>
   );

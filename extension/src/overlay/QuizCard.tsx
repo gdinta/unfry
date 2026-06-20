@@ -8,7 +8,7 @@ const cyan = "#5EEAD4";
 const rose = "#FB7185";
 const amber = "#FBBF24";
 
-export function QuizCard({ challenge, dominantCategory, onComplete, onSkip }: any) {
+export function QuizCard({ challenge, dominantCategory, onComplete, onSkip, onOpenDashboard }: any) {
   const [picked, setPicked] = useState<number | null>(null);
   const isQuiz = challenge.type === "quiz";
 
@@ -83,6 +83,26 @@ export function QuizCard({ challenge, dominantCategory, onComplete, onSkip }: an
           Skip
         </button>
       </div>
+
+      {onOpenDashboard && (
+        <button
+          onClick={onOpenDashboard}
+          style={{ width: "100%", marginTop: 10, padding: "10px 14px", borderRadius: 13,
+            border: "1px dashed rgba(255,255,255,0.12)", background: "transparent", color: faint,
+            fontSize: 12.5, cursor: "pointer", display: "flex", alignItems: "center",
+            justifyContent: "center", gap: 7, transition: "all .2s" }}
+          onMouseEnter={(e: any) => { e.currentTarget.style.color = violet; e.currentTarget.style.borderColor = `${violet}80`; }}
+          onMouseLeave={(e: any) => { e.currentTarget.style.color = faint; e.currentTarget.style.borderColor = "rgba(255,255,255,0.12)"; }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+            strokeLinecap="round" strokeLinejoin="round">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+            <polyline points="15 3 21 3 21 9" />
+            <line x1="10" y1="14" x2="21" y2="3" />
+          </svg>
+          Open dashboard instead
+        </button>
+      )}
     </>
   );
 }
